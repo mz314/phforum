@@ -1,15 +1,9 @@
 {% extends "base.volt" %}
 {% block content %}
-    
-    <table class="table-bordered" style="width: 100%">
-        <tbody>
-            {% for m in messages %}
-                <tr>
-                    <td>{{m.uname}}</td><td>{{ m.text }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h2>
+        All messages
+    </h2>
+   {% include 'common/message_list.volt' %}
         
     <br />
     <br />

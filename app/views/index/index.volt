@@ -1,9 +1,12 @@
 {% extends "base.volt" %}
 {% block content %}
-Some messages:<br />
-{% for m in messages %}
-    {{ m.id }} {{ m.text }} {{m.uname}}
-
-{% endfor %}
-
+    <h2>Newest messages</h2>
+    {% include 'common/message_list.volt' %}
+    
+    <div>
+        <a href="{{ url(['for':'board']) }}">
+           See all
+        </a>
+            
+    </div>
 {% endblock %}

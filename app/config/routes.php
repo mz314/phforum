@@ -10,11 +10,18 @@ $router->add("/", array(
 
 
 $router->add("/board", array(
-    'name'=>'board',
     'controller' => 'board',
     'action' => 'board'
 ))->setName("board");
 
+
+
+$router->add("/register", array(
+
+    'controller' => 'security',
+    'action'=>'register'
+
+))->setName("register");
 
 
 

@@ -1,9 +1,7 @@
 <?php
 namespace PhForum\Models;
-// phalcon migration generate
-// phalcon model [model]
 
-class Message extends \Phalcon\Mvc\Model
+class Users extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -18,16 +16,16 @@ class Message extends \Phalcon\Mvc\Model
     /**
      *
      * @var string
-     * @Column(type="string", nullable=false)
+     * @Column(type="string", length=45, nullable=false)
      */
-    public $text;
+    public $username;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=45, nullable=true)
+     * @Column(type="string", length=255, nullable=false)
      */
-    public $uname;
+    public $password;
 
     /**
      * Returns table name mapped in the model.
@@ -36,14 +34,14 @@ class Message extends \Phalcon\Mvc\Model
      */
     public function getSource()
     {
-        return 'messages';
+        return 'users';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Messages[]
+     * @return Users[]
      */
     public static function find($parameters = null)
     {
@@ -54,7 +52,7 @@ class Message extends \Phalcon\Mvc\Model
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Messages
+     * @return Users
      */
     public static function findFirst($parameters = null)
     {
