@@ -1,10 +1,12 @@
 <?php
+
 use Phalcon\Di\FactoryDefault;
+use Phalcon\Mvc\Dispatcher;
 
 error_reporting(E_ALL);
 
 define('BASE_PATH', dirname(__DIR__));
-define('APP_PATH', BASE_PATH . '/app');
+define('APP_PATH', BASE_PATH.'/app');
 
 try {
 
@@ -17,7 +19,7 @@ try {
     /**
      * Read services
      */
-    include APP_PATH . "/config/services.php";
+    include APP_PATH."/config/services.php";
 
     /**
      * Get config service for use in inline setup below
@@ -27,7 +29,27 @@ try {
     /**
      * Include Autoloader
      */
-    include APP_PATH . '/config/loader.php';
+    include APP_PATH.'/config/loader.php';
+
+    $di->set(
+        "dispatcher",
+        function () {
+        $dispatcher = new Dispatcher();
+
+        $dispatcher->setDefaultNamespace(
+            "PhForum\\Controllers"
+        );
+
+        return $dispatcher;
+    }
+    );
+
+    $di->set('router',
+        function() {
+        require __DIR__.'/../app/config/routes.php';
+        return $router;
+    });
+
 
     /**
      * Handle the request
@@ -35,8 +57,7 @@ try {
     $application = new \Phalcon\Mvc\Application($di);
 
     echo $application->handle()->getContent();
-
 } catch (\Exception $e) {
-    echo $e->getMessage() . '<br>';
-    echo '<pre>' . $e->getTraceAsString() . '</pre>';
+    echo $e->getMessage().'<br>';
+    echo '<pre>'.$e->getTraceAsString().'</pre>';
 }

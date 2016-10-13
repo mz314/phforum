@@ -1,1 +1,3 @@
 /nbproject
+/public/vendor
+/app/config/local_db_config.php
