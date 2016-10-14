@@ -7,19 +7,14 @@
 defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirname(__FILE__) . '/../..'));
 defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 
-if (!file_exists(APP_PATH.'/config/local_db_config.php')) {
+if (!file_exists(APP_PATH.'/config/local_config.php')) {
     die('Not configured.');
 }
 
+require APP_PATH.'/config/local_config.php';
+
 return new \Phalcon\Config([
-    'database' => [
-        'adapter'     => 'Mysql',
-        'host'        => 'localhost',
-        'username'    => 'root',
-        'password'    => 'xxx666',
-        'dbname'      => 'phforum',
-        'charset'     => 'utf8',
-    ],
+    'database' =>$localDbConfig,
     'application' => [
         'appDir'         => APP_PATH . '/',
         'formsDir'         => APP_PATH . '/forms/',
@@ -30,6 +25,6 @@ return new \Phalcon\Config([
         'pluginsDir'     => APP_PATH . '/plugins/',
         'libraryDir'     => APP_PATH . '/library/',
         'cacheDir'       => BASE_PATH . '/cache/',
-        'baseUri'        => '/phform/',
+        'baseUri'        => $baseUri,
     ]
 ]);

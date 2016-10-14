@@ -2,9 +2,10 @@
 $localDbConfig = [
     'adapter' => 'Mysql',
     'host' => 'localhost',
-    'username' => '',
-    'password' => '',
-    'dbname' => '',
+    'username' => 'root',
+    'password' => 'xxx666',
+    'dbname' => 'phforum',
     'charset' => 'utf8',
 ];
 
+$baseUri = '/phforum/';
