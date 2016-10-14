@@ -2,19 +2,19 @@
 
 namespace PhForum\Controllers;
 use Phalcon\Mvc\Controller;
-use PhForum\Models\Message;
+use PhForum\Models\Threads;
 
 class IndexController extends Controller
 {
     public function indexAction()
     {
 
-        $messages = Message::query()
+        $messages = Threads::query()
             ->order('id desc')
             ->limit(10)
             ->execute()
             ;
-        $this->view->messages = $messages; //\PhForum\Models\Message::find();
+        $this->view->messages = $messages; 
 
     }
 

@@ -14,7 +14,10 @@ $router->add("/board", array(
     'action' => 'board'
 ))->setName("board");
 
-
+$router->add("/board/thread/{thread_id}", array(
+    'controller' => 'board',
+    'action' => 'thread'
+))->setName("thread");
 
 $router->add("/register", array(
 
@@ -24,4 +27,17 @@ $router->add("/register", array(
 ))->setName("register");
 
 
+$router->add("/login", array(
+
+    'controller' => 'security',
+    'action'=>'login'
+
+))->setName("login");
+
+$router->add("/logout", array(
+
+    'controller' => 'security',
+    'action'=>'logout'
+
+))->setName("logout");
 

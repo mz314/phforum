@@ -1,8 +1,7 @@
 <?php
 namespace PhForum\Models;
-use PhForum\Lib\Auth\UserInterface;
 
-class Users extends \Phalcon\Mvc\Model implements UserInterface
+class Threads extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -17,16 +16,31 @@ class Users extends \Phalcon\Mvc\Model implements UserInterface
     /**
      *
      * @var string
-     * @Column(type="string", length=45, nullable=false)
+     * @Column(type="string", nullable=false)
      */
-    public $username;
+    public $text;
+
+    /**
+     *
+     * @var integer
+     * @Column(type="integer", length=11, nullable=true)
+     */
+    public $user_id;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=255, nullable=false)
+     * @Column(type="string", length=45, nullable=false)
      */
-    public $password;
+    public $title;
+
+    /**
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        $this->belongsTo('user_id', 'PhForum\\Models\\Users', 'id', ['alias' => 'Users']);
+    }
 
     /**
      * Returns table name mapped in the model.
@@ -35,14 +49,16 @@ class Users extends \Phalcon\Mvc\Model implements UserInterface
      */
     public function getSource()
     {
-        return 'users';
+        return 'threads';
     }
 
+   
+    
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Users[]
+     * @return Messages[]
      */
     public static function find($parameters = null)
     {
@@ -53,21 +69,11 @@ class Users extends \Phalcon\Mvc\Model implements UserInterface
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Users
+     * @return Messages
      */
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
-    }
-    
-    public function isAuthenticated()
-    {
-        return true;
-    }
-    
-    public function __toString()
-    {
-        return $this->username;
     }
 
 }

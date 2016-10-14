@@ -1,4 +1,5 @@
 <?php
+
 namespace PhForum\Forms;
 
 use Phalcon\Forms\Form;
@@ -6,24 +7,21 @@ use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\TextArea;
 use Phalcon\Validation\Validator\PresenceOf;
 
-class MessageForm extends Form
+class LoginForm extends Form
 {
+
     public function initialize()
     {
+         $this->add(
+            (new Text(
+            "username"
+            ))->addValidator(new PresenceOf())
+        );
+
         $this->add(
             (new Text(
-                "title"
+            "password"
             ))->addValidator(new PresenceOf())
         );
-
-
-
-        $this->add(
-            (new TextArea(
-                "text"
-            ))->addValidator(new PresenceOf())
-        );
-
-
     }
 }

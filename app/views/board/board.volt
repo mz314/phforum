@@ -12,7 +12,7 @@
         {% for m in form.getMessages() %}
             {{m}}
         {% endfor %}
-        {{form.render("uname")}}
+        {{form.render("title")}}
         {{form.render("text")}}
         <button type="submit">Send</button>
     </form>

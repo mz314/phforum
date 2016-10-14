@@ -1,0 +1,12 @@
+.topic-list {
+  width: 50%;
+}
+.topic-list .topic-item {
+  background-color: #aaa;
+  /*        border-radius: 10%;*/
+  margin: 10px;
+  padding: 10px;
+}
+.topic-list .topic-item .title {
+  font-weight: bold;
+}

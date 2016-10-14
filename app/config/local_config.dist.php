@@ -9,3 +9,4 @@ $localDbConfig = [
 ];
 
 $baseUri = '';
+$authSecret = 'SomeSecret';

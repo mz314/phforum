@@ -1,5 +1,4 @@
 <?php
-
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
 use Phalcon\Mvc\Url as UrlResolver;
@@ -12,16 +11,14 @@ use Phalcon\Security;
 /**
  * Shared configuration service
  */
-$di->setShared('config',
-    function () {
-    return include APP_PATH."/config/config.php";
+$di->setShared('config', function () {
+    return include APP_PATH . "/config/config.php";
 });
 
 /**
  * The URL component is used to generate all kind of urls in the application
  */
-$di->setShared('url',
-    function () {
+$di->setShared('url', function () {
     $config = $this->getConfig();
 
     $url = new UrlResolver();
@@ -36,8 +33,7 @@ $di->setShared('url',
 /**
  * Setting up the view component
  */
-$di->setShared('view',
-    function () {
+$di->setShared('view', function () {
     $config = $this->getConfig();
 
     $view = new View();
@@ -58,7 +54,6 @@ $di->setShared('view',
 
             return $volt;
         },
-            '.phtml' => PhpEngine::class
         ]);
 
         return $view;
@@ -67,11 +62,10 @@ $di->setShared('view',
     /**
      * Database connection is created based in the parameters defined in the configuration file
      */
-    $di->setShared('db',
-        function () {
+    $di->setShared('db', function () {
         $config = $this->getConfig();
 
-        $class      = 'Phalcon\Db\Adapter\Pdo\\'.$config->database->adapter;
+        $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
         $connection = new $class([
             'host' => $config->database->host,
             'username' => $config->database->username,
@@ -87,16 +81,14 @@ $di->setShared('view',
     /**
      * If the configuration specify the use of metadata adapter use it or use memory otherwise
      */
-    $di->setShared('modelsMetadata',
-        function () {
+    $di->setShared('modelsMetadata', function () {
         return new MetaDataAdapter();
     });
 
     /**
      * Register the session flash service with the Twitter Bootstrap classes
      */
-    $di->set('flash',
-        function () {
+    $di->set('flash', function () {
         return new Flash([
             'error' => 'alert alert-danger',
             'success' => 'alert alert-success',
@@ -108,16 +100,14 @@ $di->setShared('view',
     /**
      * Start the session the first time some component request the session service
      */
-    $di->setShared('session',
-        function () {
+    $di->setShared('session', function () {
         $session = new SessionAdapter();
         $session->start();
 
         return $session;
     });
     $di->set(
-        "security",
-        function () {
+        "security", function () {
         $security = new Security();
 
         // Set the password hashing factor to 12 rounds
@@ -126,3 +116,6 @@ $di->setShared('view',
         return $security;
     }, true
     );
+
+  
+    

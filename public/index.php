@@ -1,12 +1,11 @@
 <?php
-
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Dispatcher;
 
 error_reporting(E_ALL);
 
 define('BASE_PATH', dirname(__DIR__));
-define('APP_PATH', BASE_PATH.'/app');
+define('APP_PATH', BASE_PATH . '/app');
 
 try {
 
@@ -19,7 +18,7 @@ try {
     /**
      * Read services
      */
-    include APP_PATH."/config/services.php";
+    include APP_PATH . "/config/services.php";
 
     /**
      * Get config service for use in inline setup below
@@ -29,11 +28,10 @@ try {
     /**
      * Include Autoloader
      */
-    include APP_PATH.'/config/loader.php';
+    include APP_PATH . '/config/loader.php';
 
     $di->set(
-        "dispatcher",
-        function () {
+        "dispatcher", function () {
         $dispatcher = new Dispatcher();
 
         $dispatcher->setDefaultNamespace(
@@ -44,12 +42,13 @@ try {
     }
     );
 
-    $di->set('router',
-        function() {
-        require __DIR__.'/../app/config/routes.php';
+    $di->set('router', function() {
+        require __DIR__ . '/../app/config/routes.php';
         return $router;
     });
-
+    $di->set('auth', function () use ($config) {
+        return new PhForum\Lib\Auth\Auth($config->application->authSecret);
+    });
 
     /**
      * Handle the request
@@ -58,6 +57,6 @@ try {
 
     echo $application->handle()->getContent();
 } catch (\Exception $e) {
-    echo $e->getMessage().'<br>';
-    echo '<pre>'.$e->getTraceAsString().'</pre>';
+    echo $e->getMessage() . '<br>';
+    echo '<pre>' . $e->getTraceAsString() . '</pre>';
 }

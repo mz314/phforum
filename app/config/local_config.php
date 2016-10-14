@@ -9,3 +9,4 @@ $localDbConfig = [
 ];
 
 $baseUri = '/phforum/';
+$authSecret = 'SomeSecret';
